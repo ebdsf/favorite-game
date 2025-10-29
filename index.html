@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duskwood - A Mensagem</title>
+    <style>
+        /* * Aqui começa o CSS! A tag <style> guarda todo o "estilo" da página.
+         * CSS (Cascading Style Sheets) é a linguagem que usamos para deixar o HTML bonito.
+         * Ela funciona com "seletores" (ex: 'body', '#chat') e "propriedades" (ex: 'background-color').
+        */
+
+        /* 'body' seleciona a tag <body> inteira, ou seja, o corpo da página. */
+        body {
+            /* 'background-color' define a cor do fundo. Usamos 'preto' (black). */
+            background-color: #000000;
+
+            /* 'font-family' define o tipo da fonte (letra) que usaremos. */
+            /* "Courier New" é uma fonte monoespaçada, dá um ar de "hacker" / terminal. */
+            font-family: "Courier New", Courier, monospace;
+
+            /* 'color' define a cor padrão do TEXTO. */
+            /* Escolhi um verde-oliva claro, como você pediu. */
+            color: #b8cc5c; /* Este é um tom amarelo-oliva/verde claro */
+            
+            /* 'margin: 0' e 'padding: 0' removem espaçamentos padrões do navegador. */
+            margin: 0;
+            padding: 0;
+
+            /* Essas 3 linhas abaixo são um truque para centralizar nosso conteúdo. */
+            display: flex;
+            flex-direction: column; /* Empilha os itens verticalmente */
+            align-items: center; /* Centraliza horizontalmente */
+        }
+
+        /* 'header' seleciona a tag <header>. */
+        header {
+            width: 100%; /* Ocupa 100% da largura */
+            text-align: center; /* Centraliza o texto */
+            
+            /* 'padding' é o espaçamento INTERNO. Pense na "borda" de uma camisa. */
+            padding: 20px 0;
+            
+            /* 'border-bottom' cria uma linha na parte de baixo. */
+            /* 2px de espessura, sólida, e na cor roxa que você pediu. */
+            border-bottom: 2px solid #9400D3; /* Roxo */
+        }
+
+        /* Seleciona o <h1> (título principal) DENTRO do <header> */
+        header h1 {
+            /* 'font-size' muda o tamanho do texto. */
+            font-size: 2.5em; /* 'em' é uma unidade de medida relativa */
+            color: #9400D3; /* Roxo */
+            margin: 0; /* Remove a margem padrão do título */
+        }
+
+        /* 'main' seleciona a tag <main>, nosso conteúdo principal. */
+        main {
+            /* 'max-width' define a largura MÁXIMA. */
+            /* Isso impede que o site fique "esticado" em telas muito grandes. */
+            max-width: 600px;
+            width: 90%; /* Ocupa 90% da largura da tela, até o máximo de 600px */
+            padding: 20px;
+        }
+
+        /* '#' significa que estamos selecionando um 'id'. */
+        /* '#chat-simulador' seleciona a <section> com id="chat-simulador" */
+        #chat-simulador {
+            /* Usamos um verde musgo bem escuro para o fundo da "conversa". */
+            background-color: #1a2a1a; /* Verde musgo escuro */
+            
+            /* 'border-radius' arredonda as bordas da caixa. */
+            border-radius: 8px;
+            
+            /* 'border' é a borda da caixa. */
+            border: 1px solid #556B2F; /* Verde musgo (um pouco mais claro) */
+            padding: 20px;
+        }
+
+        /* Seleciona o <h2> (subtítulo) dentro de #chat-simulador */
+        #chat-simulador h2 {
+            color: #ADFF2F; /* Verde mais claro (quase neon) */
+            text-align: center;
+            /* 'margin-top: 0' remove o espaço extra em cima do subtítulo */
+            margin-top: 0;
+        }
+
+        /* Esta é a "janela" onde as mensagens aparecem */
+        #chat-log {
+            background-color: #050505; /* Um preto um pouco mais claro que o fundo */
+            height: 200px; /* Altura fixa */
+            
+            /* 'overflow-y: auto' faz com que, se tiver muito texto, */
+            /* uma barra de rolagem apareça SÓ na vertical. */
+            overflow-y: auto;
+            
+            border: 1px solid #556B2F; /* Verde musgo */
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px; /* Espaço abaixo da janela de chat */
+        }
+
+        /* '.' significa que estamos selecionando uma 'class'. */
+        /* Esta classe será usada para as mensagens do JOGADOR. */
+        .mensagem-jogador {
+            /* 'text-align: right' alinha o texto à direita (nossas mensagens). */
+            text-align: right;
+            color: #b8cc5c; /* Amarelo-oliva */
+            margin: 5px 0;
+            font-style: italic; /* Deixa o texto em itálico */
+        }
+
+        /* Esta classe será usada para as mensagens do "Jake". */
+        .mensagem-jake {
+            text-align: left; /* Alinha o texto à esquerda (mensagens dele). */
+            color: #ADFF2F; /* Verde claro */
+            margin: 10px 0;
+            
+            /* 'font-weight: bold' deixa o texto em negrito. */
+            font-weight: bold;
+        }
+        
+        /* Classe para a mensagem "digitando..." */
+        .digitando {
+            color: #808000; /* Amarelo-oliva mais escuro */
+            font-style: italic;
+        }
+
+        /* Seleciona o container dos botões */
+        .botoes-resposta {
+            display: flex; /* Coloca os botões lado a lado */
+            flex-direction: column; /* Mas... opa! 'column' coloca um EMBAIXO do outro. */
+            gap: 10px; /* 'gap' é o espaço ENTRE os botões. */
+        }
+        
+        /* Seleciona TODOS os <button> dentro de .botoes-resposta */
+        .botoes-resposta button {
+            background-color: #9400D3; /* Roxo */
+            color: #FFFFFF; /* Branco */
+            border: none; /* Tira a borda padrão feia do botão */
+            padding: 15px;
+            font-size: 1em;
+            font-family: "Courier New", Courier, monospace; /* Mesma fonte do site */
+            border-radius: 5px;
+            
+            /* 'cursor: pointer' faz o mouse virar uma "mãozinha" ao passar em cima. */
+            cursor: pointer;
+            
+            /* 'transition' faz uma animação suave quando o botão muda de estado. */
+            transition: background-color 0.3s;
+        }
+
+        /* 'hover' é um "pseudo-seletor". Ele aplica o estilo QUANDO */
+        /* o mouse está EM CIMA do botão. */
+        .botoes-resposta button:
