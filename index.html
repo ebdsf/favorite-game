@@ -152,4 +152,148 @@
 
         /* 'hover' é um "pseudo-seletor". Ele aplica o estilo QUANDO */
         /* o mouse está EM CIMA do botão. */
-        .botoes-resposta button:
+        .botoes-resposta button:hover {
+            /* Escurece um pouco o roxo quando o mouse passa por cima. */
+            background-color: #6a009a;
+        }
+
+        /* 'footer' seleciona a tag <footer> (rodapé). */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px; /* Espaço acima do rodapé */
+            font-size: 0.9em;
+            color: #556B2F; /* Verde musgo, mais discreto */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Bem-vindo(a), Duskwood</h1>
+        </header>
+
+    <main>
+        <section id="chat-simulador">
+            <h2>A Mensagem Inesperada</h2>
+            <div id="chat-log">
+                <p>...Conectando ao servidor...</p>
+                <p>...Servidor encontrado...</p>
+                <p><strong>[Jake]</strong>: Tem alguém aí?</p>
+            </div>
+
+            <div class="botoes-resposta" id="container-botoes">
+                <button id="opcaoA">[Opção A] Sim. O que aconteceu?</button>
+                <button id="opcaoB">[Opção B] Quem é você? Como conseguiu meu número?</button>
+                <button id="opcaoC">[Opção C] Estou ocupado. Fale logo.</button>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>Site criado por Duskwood (com uma ajudinha da IA!)</p>
+    </footer>
+
+
+    <script>
+        /*
+         * Aqui começa o JavaScript! A tag <script> guarda todo o código "interativo".
+         * Se o HTML é o esqueleto e o CSS é a pele/roupa, o JS é o cérebro e os músculos.
+         * Ele "dá vida" à página.
+         * Colocamos o <script> no final do <body> para garantir que o HTML
+         * (os botões, os divs) já "exista" na página antes do JS tentar encontrá-los.
+        */
+
+        // '//' Inicia um comentário de uma linha em JavaScript.
+
+        // 1. ENCONTRAR OS ELEMENTOS NA PÁGINA
+        // Precisamos "capturar" os elementos do HTML para poder manipulá-los.
+        
+        // 'const' declara uma "constante", uma variável que não vai mudar.
+        // 'document.getElementById("ID_DO_ELEMENTO")' é o comando para
+        // "JavaScript, vá no documento HTML e encontre o elemento com o RG 'ID_DO_ELEMENTO'".
+        
+        const botaoA = document.getElementById("opcaoA");
+        const botaoB = document.getElementById("opcaoB");
+        const botaoC = document.getElementById("opcaoC");
+        
+        // Capturamos a "janela" do chat para adicionar novas mensagens.
+        const chatLog = document.getElementById("chat-log");
+        
+        // Capturamos o "container" (a caixa) que guarda os botões.
+        const containerBotoes = document.getElementById("container-botoes");
+
+        
+        // 2. DEFINIR O QUE ACONTECE QUANDO ALGUÉM CLICA
+        
+        // 'addEventListener' é o comando mais importante.
+        // Ele diz ao elemento: "Ei, fique 'ouvindo' por um evento".
+        // O evento que queremos "ouvir" é o 'click'.
+        
+        // Quando o 'botaoA' for clicado, ele vai executar a função 'responder'.
+        botaoA.addEventListener('click', responder);
+        botaoB.addEventListener('click', responder);
+        botaoC.addEventListener('click', responder);
+        
+        
+        // 3. CRIAR A FUNÇÃO DE RESPOSTA
+        
+        // 'function' declara uma função. Uma função é um bloco de código
+        // que podemos "chamar" (executar) quando quisermos.
+        // 'evento' é um objeto que o navegador nos dá com informações sobre o clique.
+        function responder(evento) {
+            
+            // 'evento.target' nos diz EXATAMENTE qual botão foi clicado (A, B ou C).
+            const botaoClicado = evento.target;
+            
+            // Pegamos o texto que estava escrito dentro do botão.
+            const textoDaEscolha = botaoClicado.innerText;
+
+            // --- AÇÃO 1: Mostrar a escolha do jogador no chat ---
+            
+            // 'chatLog.innerHTML += ...' significa "Pegue o que JÁ TEM dentro do chatLog
+            // e ADICIONE (+=) este novo pedaço de HTML".
+            // Estamos adicionando um novo parágrafo com a classe 'mensagem-jogador'.
+            chatLog.innerHTML += `<p class="mensagem-jogador">${textoDaEscolha}</p>`;
+
+            
+            // --- AÇÃO 2: Esconder os botões ---
+            // Não queremos que o usuário clique de novo.
+            // Acessamos o 'style' (CSS) do container e mudamos o 'display' para 'none' (sumir).
+            containerBotoes.style.display = 'none';
+
+            
+            // --- AÇÃO 3: Simular "Jake digitando..." ---
+            // Isso dá um efeito mais realista, como no jogo!
+            
+            // Adicionamos a mensagem "digitando..."
+            chatLog.innerHTML += `<p class="digitando" id="msg-digitando">Jake está digitando...</p>`;
+
+            // 'setTimeout' é uma função que espera um tempo antes de executar um código.
+            // Ela espera 2000 milissegundos (ou 2 segundos).
+            setTimeout(function() {
+            
+                // --- AÇÃO 4 (DEPOIS DE 2 SEGUNDOS): Mostrar a resposta do Jake ---
+                
+                // Primeiro, encontramos a mensagem "digitando..." que acabamos de adicionar.
+                const msgDigitando = document.getElementById("msg-digitando");
+                // E a removemos.
+                msgDigitando.remove();
+                
+                // Agora, adicionamos a resposta final do Jake.
+                // Não importa qual botão você clicou, a história do Jake continua!
+                chatLog.innerHTML += `<p class="mensagem-jake"><strong>[Jake]</strong>: Ótimo. Preciso da sua ajuda.</p>`;
+                chatLog.innerHTML += `<p class="mensagem-jake"><strong>[Jake]</strong>: É um assunto sério. É sobre a Hannah.</p>`;
+                
+                // Vamos fazer o scroll (rolagem) do chat ir até o final automaticamente.
+                chatLog.scrollTop = chatLog.scrollHeight;
+            
+            }, 2000); // 2000 ms = 2 segundos
+        }
+
+    </script>
+
+</body>
+
+</html>
