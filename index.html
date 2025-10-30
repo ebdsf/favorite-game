@@ -1,299 +1,432 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duskwood - A Mensagem</title>
-    <style>
-        /* * Aqui começa o CSS! A tag <style> guarda todo o "estilo" da página.
-         * CSS (Cascading Style Sheets) é a linguagem que usamos para deixar o HTML bonito.
-         * Ela funciona com "seletores" (ex: 'body', '#chat') e "propriedades" (ex: 'background-color').
-        */
+  <meta charset="UTF-8">
 
-        /* 'body' seleciona a tag <body> inteira, ou seja, o corpo da página. */
-        body {
-            /* 'background-color' define a cor do fundo. Usamos 'preto' (black). */
-            background-color: #000000;
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            /* 'font-family' define o tipo da fonte (letra) que usaremos. */
-            /* "Courier New" é uma fonte monoespaçada, dá um ar de "hacker" / terminal. */
-            font-family: "Courier New", Courier, monospace;
+  <title>Investigação Duskwood</title>
 
-            /* 'color' define a cor padrão do TEXTO. */
-            /* Escolhi um verde-oliva claro, como você pediu. */
-            color: #b8cc5c; /* Este é um tom amarelo-oliva/verde claro */
-            
-            /* 'margin: 0' e 'padding: 0' removem espaçamentos padrões do navegador. */
-            margin: 0;
-            padding: 0;
+  <style>
+    /* '--nome-da-variavel' é uma Variável CSS.
+      Isso nos ajuda a reutilizar as cores que você escolheu em vários lugares.
+      Se quisermos mudar o verde, só mudamos aqui!
+    */
+    :root {
+      --cor-fundo-escuro: #1a1a1a;        /* Um cinza quase preto, para o fundo principal */
+      --cor-fundo-secundario: #2c2c2c;  /* Um cinza um pouco mais claro, para "caixas" */
+      --cor-texto-principal: #FAFAFA;     /* Branco, para leitura */
+      --cor-verde-neon: #00FF41;         /* O verde "hacker" para destaques */
+      --cor-azul-calmo: #4a69bd;         /* Azul para links ou títulos */
+      --cor-vermelho-alerta: #E74C3C;    /* Vermelho para alertas ou perigo */
+    }
 
-            /* Essas 3 linhas abaixo são um truque para centralizar nosso conteúdo. */
-            display: flex;
-            flex-direction: column; /* Empilha os itens verticalmente */
-            align-items: center; /* Centraliza horizontalmente */
-        }
+    /*
+      O seletor '*' (asterisco) seleciona TODOS os elementos da página.
+      Usamos para aplicar uma "regra base" geral.
+    */
+    * {
+      /* 'box-sizing: border-box;' é um truque moderno. Faz com que 'padding' (espaçamento interno)
+         e 'border' (borda) não aumentem o tamanho total da caixa. Facilita MUITO a vida! */
+      box-sizing: border-box;
+      /* Removemos margens e paddings padrão que os navegadores colocam */
+      margin: 0;
+      padding: 0;
+    }
 
-        /* 'header' seleciona a tag <header>. */
-        header {
-            width: 100%; /* Ocupa 100% da largura */
-            text-align: center; /* Centraliza o texto */
-            
-            /* 'padding' é o espaçamento INTERNO. Pense na "borda" de uma camisa. */
-            padding: 20px 0;
-            
-            /* 'border-bottom' cria uma linha na parte de baixo. */
-            /* 2px de espessura, sólida, e na cor roxa que você pediu. */
-            border-bottom: 2px solid #9400D3; /* Roxo */
-        }
+    /* Selecionamos a tag 'html' e 'body' (o corpo da página) */
+    html, body {
+      /* 'font-family' define a "família da fonte" (o tipo da letra). 
+         'Courier New' e 'monospace' são fontes que parecem código de máquina, perfeito para o tema! */
+      font-family: 'Courier New', Courier, monospace;
+      
+      /* 'background-color' define a cor do fundo da página. Usamos nossa variável! */
+      background-color: var(--cor-fundo-escuro);
+      
+      /* 'color' define a cor do TEXTO padrão. */
+      color: var(--cor-texto-principal);
+      
+      /* 'line-height' define a altura da linha, ou seja, o espaçamento entre as linhas de um texto. */
+      line-height: 1.6;
+    }
 
-        /* Seleciona o <h1> (título principal) DENTRO do <header> */
-        header h1 {
-            /* 'font-size' muda o tamanho do texto. */
-            font-size: 2.5em; /* 'em' é uma unidade de medida relativa */
-            color: #9400D3; /* Roxo */
-            margin: 0; /* Remove a margem padrão do título */
-        }
+    /* Selecionamos a tag '<main>'. É uma boa prática embrulhar o conteúdo principal 
+      do site dentro de uma tag 'main'. 
+    */
+    main {
+      /* 'max-width' define a largura máxima. Isso impede que o site fique "esticado" em telas gigantes. */
+      max-width: 800px;
+      
+      /* 'margin: 40px auto;' é um truque! '40px' dá espaço em cima e embaixo.
+         'auto' nas laterais faz o navegador centralizar o bloco na página. */
+      margin: 40px auto;
+      
+      /* 'padding' é o espaçamento INTERNO da caixa. */
+      padding: 20px;
+      
+      /* 'background-color' para o nosso "container" principal ser um pouco diferente do fundo. */
+      background-color: var(--cor-fundo-secundario);
+      
+      /* 'border' cria uma borda. '1px' (espessura), 'solid' (tipo) e a cor. */
+      border: 1px solid var(--cor-verde-neon);
+      
+      /* 'border-radius' arredonda as bordas da caixa. */
+      border-radius: 8px;
+    }
 
-        /* 'main' seleciona a tag <main>, nosso conteúdo principal. */
-        main {
-            /* 'max-width' define a largura MÁXIMA. */
-            /* Isso impede que o site fique "esticado" em telas muito grandes. */
-            max-width: 600px;
-            width: 90%; /* Ocupa 90% da largura da tela, até o máximo de 600px */
-            padding: 20px;
-        }
+    /* Selecionamos a tag '<h1>' (o título principal) */
+    h1 {
+      /* O título principal terá a cor verde neon! */
+      color: var(--cor-verde-neon);
+      /* 'text-align: center;' centraliza o texto. */
+      text-align: center;
+      /* 'text-transform: uppercase;' deixa todo o texto em MAIÚSCULAS. */
+      text-transform: uppercase;
+      /* 'letter-spacing' aumenta o espaço entre as letras, para um efeito dramático. */
+      letter-spacing: 2px;
+    }
 
-        /* '#' significa que estamos selecionando um 'id'. */
-        /* '#chat-simulador' seleciona a <section> com id="chat-simulador" */
-        #chat-simulador {
-            /* Usamos um verde musgo bem escuro para o fundo da "conversa". */
-            background-color: #1a2a1a; /* Verde musgo escuro */
-            
-            /* 'border-radius' arredonda as bordas da caixa. */
-            border-radius: 8px;
-            
-            /* 'border' é a borda da caixa. */
-            border: 1px solid #556B2F; /* Verde musgo (um pouco mais claro) */
-            padding: 20px;
-        }
+    /* Selecionamos a tag '<h2>' (o subtítulo) */
+    h2 {
+      /* O subtítulo (seu nome) será em azul. */
+      color: var(--cor-azul-calmo);
+      text-align: center;
+      /* 'font-style: italic;' deixa o texto em itálico. */
+      font-style: italic;
+      /* 'margin-bottom' adiciona um espaço ABAIXO do elemento. */
+      margin-bottom: 30px;
+      /* 'border-bottom' cria uma linha SÓ na parte de baixo. */
+      border-bottom: 1px dashed var(--cor-azul-calmo);
+      /* 'padding-bottom' dá um espaço entre o texto e a linha que criamos. */
+      padding-bottom: 10px;
+    }
+    
+    /* Selecionamos a tag '<h3>' (títulos menores) */
+    h3 {
+      color: var(--cor-verde-neon);
+      margin-top: 25px; /* Espaço ACIMA do título */
+      margin-bottom: 10px;
+    }
+    
+    /* Selecionamos a tag '<p>' (parágrafo) */
+    p {
+      /* 'margin-bottom' para dar um respiro entre os parágrafos. */
+      margin-bottom: 15px;
+    }
 
-        /* Seleciona o <h2> (subtítulo) dentro de #chat-simulador */
-        #chat-simulador h2 {
-            color: #ADFF2F; /* Verde mais claro (quase neon) */
-            text-align: center;
-            /* 'margin-top: 0' remove o espaço extra em cima do subtítulo */
-            margin-top: 0;
-        }
+    /* INTERAÇÃO 1: MENSAGEM OCULTA (Requisito 🕵️‍♀️)
+      Selecionamos qualquer elemento com a classe (class) '.segredo'
+    */
+    .segredo {
+      background-color: #333; /* Fundo um pouco mais escuro para destacar */
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 1px dashed var(--cor-vermelho-alerta);
+      /* 'cursor: help;' muda o mouse para um "?", indicando que algo acontece ali. */
+      cursor: help;
+    }
 
-        /* Esta é a "janela" onde as mensagens aparecem */
-        #chat-log {
-            background-color: #050505; /* Um preto um pouco mais claro que o fundo */
-            height: 200px; /* Altura fixa */
-            
-            /* 'overflow-y: auto' faz com que, se tiver muito texto, */
-            /* uma barra de rolagem apareça SÓ na vertical. */
-            overflow-y: auto;
-            
-            border: 1px solid #556B2F; /* Verde musgo */
-            border-radius: 4px;
-            padding: 10px;
-            margin-bottom: 20px; /* Espaço abaixo da janela de chat */
-        }
+    /* Selecionamos o elemento com classe '.texto-oculto' QUE ESTÁ DENTRO 
+      de um elemento com classe '.segredo' 
+    */
+    .segredo .texto-oculto {
+      /* Por padrão, o texto secreto fica INVISÍVEL */
+      display: none; 
+      color: var(--cor-vermelho-alerta); /* Cor de perigo! */
+      font-weight: bold; /* Deixa o texto em negrito */
+    }
 
-        /* '.' significa que estamos selecionando uma 'class'. */
-        /* Esta classe será usada para as mensagens do JOGADOR. */
-        .mensagem-jogador {
-            /* 'text-align: right' alinha o texto à direita (nossas mensagens). */
-            text-align: right;
-            color: #b8cc5c; /* Amarelo-oliva */
-            margin: 5px 0;
-            font-style: italic; /* Deixa o texto em itálico */
-        }
+    /* Este é o "pseudo-seletor" :hover.
+      Ele aplica o estilo SOMENTE quando o mouse está EM CIMA do '.segredo'.
+      Quando o mouse passar por cima...
+    */
+    .segredo:hover .texto-oculto {
+      /* ...o texto secreto se torna VISÍVEL! 'display: block;' faz ele ocupar sua própria linha. */
+      display: block;
+    }
+    
+    /* Selecionamos a tag '<ul>' (lista não ordenada).
+      'list-style-type: none;' remove as "bolinhas" padrão da lista.
+    */
+    ul {
+      list-style-type: none;
+      padding-left: 10px;
+    }
+    
+    /* Selecionamos a tag '<li>' (item da lista) */
+    li {
+      margin-bottom: 5px;
+    }
+    
+    /* O pseudo-elemento '::before' insere um conteúdo ANTES de cada '<li>'.
+      Vamos usá-lo para criar um marcador personalizado!
+    */
+    li::before {
+      content: '>'; /* O conteúdo que queremos inserir (um símbolo de "prompt") */
+      color: var(--cor-verde-neon); /* Na cor verde */
+      margin-right: 10px; /* Um espacinho entre o '>' e o texto */
+      font-weight: bold;
+    }
 
-        /* Esta classe será usada para as mensagens do "Jake". */
-        .mensagem-jake {
-            text-align: left; /* Alinha o texto à esquerda (mensagens dele). */
-            color: #ADFF2F; /* Verde claro */
-            margin: 10px 0;
-            
-            /* 'font-weight: bold' deixa o texto em negrito. */
-            font-weight: bold;
-        }
-        
-        /* Classe para a mensagem "digitando..." */
-        .digitando {
-            color: #808000; /* Amarelo-oliva mais escuro */
-            font-style: italic;
-        }
+    /* --- ESTILOS DO "MODO HACKER" (Requisito 💡) --- */
+    
+    /* Esta classe '.hacker-controls' é só para organizar nosso botão.
+      'text-align: center;' centraliza tudo que está dentro dela (o botão).
+    */
+    .hacker-controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    /* Selecionamos o botão pelo seu 'id' único '#hacker-toggle'.
+      IDs são usados para elementos que só existem UMA vez na página.
+    */
+    #hacker-toggle {
+      background-color: var(--cor-vermelho-alerta);
+      color: var(--cor-texto-principal);
+      border: none;
+      padding: 10px 20px;
+      font-family: 'Courier New', Courier, monospace; /* Mesma fonte do site */
+      font-size: 16px; /* Tamanho da fonte */
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer; /* Muda o mouse para uma "mãozinha" de clique */
+      
+      /* 'transition' faz a mudança de cor ser suave (em 0.3 segundos) */
+      transition: background-color 0.3s ease;
+    }
+    
+    /* Quando o mouse passa por cima (hover) do botão */
+    #hacker-toggle:hover {
+      /* 'filter: brightness(1.2);' deixa o botão 20% mais brilhante. */
+      filter: brightness(1.2);
+    }
+    
+    /* Esta é a parte MÁGICA do JavaScript!
+      Estes estilos SÓ vão funcionar quando a tag '<body>' também tiver a classe '.modo-hacker'.
+    */
+    body.modo-hacker {
+      /* Invertemos! O fundo fica VERDE e o texto PRETO */
+      background-color: #0A1A0A; /* Um verde bem escuro */
+      color: var(--cor-verde-neon);
+    }
+    
+    /* No modo hacker, a 'main' também muda */
+    body.modo-hacker main {
+      background-color: #000; /* Fundo preto total */
+      border-color: var(--cor-verde-neon);
+    }
+    
+    /* No modo hacker, os títulos e parágrafos ficam verdes */
+    body.modo-hacker h1,
+    body.modo-hacker h2,
+    body.modo-hacker h3,
+    body.modo-hacker p {
+      color: var(--cor-verde-neon);
+    }
+    
+    /* O botão também muda no modo hacker */
+    body.modo-hacker #hacker-toggle {
+      background-color: var(--cor-verde-neon);
+      color: #000;
+    }
+    
+    /* O texto secreto também muda */
+    body.modo-hacker .segredo {
+      border-color: var(--cor-verde-neon);
+    }
+    body.modo-hacker .segredo .texto-oculto {
+      color: #FFF; /* O texto oculto fica branco contra o fundo preto */
+    }
+    
+    /* Esta é a 'div' que vai mostrar os "códigos piscando".
+      Por padrão, ela fica escondida.
+    */
+    .codigo-hacker {
+      display: none; /* ESCONDIDO por padrão */
+      position: fixed; /* 'fixed' faz ele "flutuar" sobre a página, mesmo se rolarmos */
+      top: 0;
+      left: 0;
+      width: 100%; /* Ocupa 100% da largura */
+      height: 100%; /* Ocupa 100% da altura */
+      background: rgba(0, 0, 0, 0.5); /* Um fundo preto semi-transparente */
+      color: var(--cor-verde-neon);
+      font-size: 10px;
+      /* 'pointer-events: none;' faz o mouse "ignorar" essa camada,
+         podendo clicar nas coisas "atrás" dela. */
+      pointer-events: none;
+      
+      /* 'animation' aplica nossa animação 'piscar' */
+      animation: piscar 0.1s infinite;
+      
+      /* 'white-space: pre;' respeita os espaços e quebras de linha do nosso "código" */
+      white-space: pre;
+      overflow: hidden; /* Esconde o que vazar da tela */
+    }
+    
+    /* Quando o 'body' tiver a classe '.modo-hacker',
+      o '.codigo-hacker' se torna VISÍVEL!
+    */
+    body.modo-hacker .codigo-hacker {
+      display: block; /* MOSTRAR! */
+    }
+    
+    /* '@keyframes' define uma animação. Demos o nome de 'piscar'.
+      A animação vai de 0% (início) até 100% (fim).
+    */
+    @keyframes piscar {
+      0% { opacity: 1; } /* Começa 100% visível */
+      50% { opacity: 0.5; } /* Na metade, fica 50% transparente */
+      100% { opacity: 1; } /* Volta a 100% visível */
+    }
 
-        /* Seleciona o container dos botões */
-        .botoes-resposta {
-            display: flex; /* Coloca os botões lado a lado */
-            flex-direction: column; /* Mas... opa! 'column' coloca um EMBAIXO do outro. */
-            gap: 10px; /* 'gap' é o espaço ENTRE os botões. */
-        }
-        
-        /* Seleciona TODOS os <button> dentro de .botoes-resposta */
-        .botoes-resposta button {
-            background-color: #9400D3; /* Roxo */
-            color: #FFFFFF; /* Branco */
-            border: none; /* Tira a borda padrão feia do botão */
-            padding: 15px;
-            font-size: 1em;
-            font-family: "Courier New", Courier, monospace; /* Mesma fonte do site */
-            border-radius: 5px;
-            
-            /* 'cursor: pointer' faz o mouse virar uma "mãozinha" ao passar em cima. */
-            cursor: pointer;
-            
-            /* 'transition' faz uma animação suave quando o botão muda de estado. */
-            transition: background-color 0.3s;
-        }
-
-        /* 'hover' é um "pseudo-seletor". Ele aplica o estilo QUANDO */
-        /* o mouse está EM CIMA do botão. */
-        .botoes-resposta button:hover {
-            /* Escurece um pouco o roxo quando o mouse passa por cima. */
-            background-color: #6a009a;
-        }
-
-        /* 'footer' seleciona a tag <footer> (rodapé). */
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px; /* Espaço acima do rodapé */
-            font-size: 0.9em;
-            color: #556B2F; /* Verde musgo, mais discreto */
-        }
-    </style>
+  </style>
 </head>
 
 <body>
-    <header>
-        <h1>Bem-vindo(a), Duskwood</h1>
-        </header>
 
-    <main>
-        <section id="chat-simulador">
-            <h2>A Mensagem Inesperada</h2>
-            <div id="chat-log">
-                <p>...Conectando ao servidor...</p>
-                <p>...Servidor encontrado...</p>
-                <p><strong>[Jake]</strong>: Tem alguém aí?</p>
-            </div>
+  <div class="codigo-hacker" aria-hidden="true">
+    01010010 01001000 01011001 01010011
+    01001010 01000001 01001011 01000101
+    SYSTEM_CALL: READ_MEM(0xDEADBEEF)
+    ACCESS_DENIED: USER(BIA) LEVEL(01)
+    ROOTKIT_DETECTED... BYPASSING...
+    01000100 01010101 01010011 01001011
+    01010111 01001111 01001111 01000100
+    QUERY: HANNAH.DONFORD.MISSING
+    ...CONNECTING TO: 00.192.168.1...
+    ...CONNECTION FAILED...
+    01010010 01001000 01011001 01010011
+    01001010 01000001 01001011 01000101
+    SYSTEM_CALL: READ_MEM(0xDEADBEEF)
+    ACCESS_DENIED: USER(BIA) LEVEL(01)
+    ROOTKIT_DETECTED... BYPASSING...
+    01000100 01010101 01010011 01001011
+    01010111 01001111 01001111 01000100
+    QUERY: HANNAH.DONFORD.MISSING
+    ...CONNECTING TO: 00.192.168.1...
+    ...CONNECTION FAILED...
+    01010010 01001000 01011001 01010011
+    01001010 01000001 01001011 01000101
+    SYSTEM_CALL: READ_MEM(0xDEADBEEF)
+    ACCESS_DENIED: USER(BIA) LEVEL(01)
+    ROOTKIT_DETECTED... BYPASSING...
+    01000100 01010101 01010011 01001011
+    01010111 01001111 01001111 01000100
+    QUERY: HANNAH.DONFORD.MISSING
+    ...CONNECTING TO: 00.192.168.1...
+    ...CONNECTION FAILED...
+  </div>
 
-            <div class="botoes-resposta" id="container-botoes">
-                <button id="opcaoA">[Opção A] Sim. O que aconteceu?</button>
-                <button id="opcaoB">[Opção B] Quem é você? Como conseguiu meu número?</button>
-                <button id="opcaoC">[Opção C] Estou ocupado. Fale logo.</button>
-            </div>
+  <main>
+    
+    <h1>O Mistério de Duskwood</h1>
+    
+    <h2>Uma investigação por: Bia</h2>
 
-        </section>
-    </main>
+    <div class="hacker-controls">
+      <button id="hacker-toggle">Ativar Modo Hacker 💡</button>
+    </div>
 
-    <footer>
-        <p>Site criado por Duskwood (com uma ajudinha da IA!)</p>
-    </footer>
+    <p>
+      Bem-vinda à sua central de investigação, Bia! Duskwood é uma vila pacata
+      cercada por uma floresta densa e sombria. Mas tudo muda quando
+      Hannah Donford desaparece sem deixar rastros.
+    </p>
 
+    <p>
+      O único rastro é uma mensagem... enviada para você. Agora, você e um
+      grupo de amigos (e suspeitos) precisam desvendar o que aconteceu.
+    </p>
 
-    <script>
-        /*
-         * Aqui começa o JavaScript! A tag <script> guarda todo o código "interativo".
-         * Se o HTML é o esqueleto e o CSS é a pele/roupa, o JS é o cérebro e os músculos.
-         * Ele "dá vida" à página.
-         * Colocamos o <script> no final do <body> para garantir que o HTML
-         * (os botões, os divs) já "exista" na página antes do JS tentar encontrá-los.
-        */
+    <p>
+      Lembre-se: 
+      <span class="segredo">
+        Todos em Duskwood têm um segredo... (passe o mouse aqui!)
+        <span class="texto-oculto">
+          ...E O CORVO É O SÍMBOLO DELES.
+        </span>
+      </span>
+    </Fp>
 
-        // '//' Inicia um comentário de uma linha em JavaScript.
+    <h3>Arquivos de Caso: Suspeitos</h3>
 
-        // 1. ENCONTRAR OS ELEMENTOS NA PÁGINA
-        // Precisamos "capturar" os elementos do HTML para poder manipulá-los.
+    <ul>
+      <li>Jessy (A amiga leal... ou sabe demais?)</li>
+      <li>Dan (O ex-namorado com álibi duvidoso)</li>
+      <li>Thomas (O namorado desesperado)</li>
+      <li>Cleo (A investigadora do grupo)</li>
+      <li>Phil (O misterioso dono do bar)</li>
+      <li>Jake (O Hacker ???)</li>
+    </ul>
+
+  </main>
+
+  <script>
+    // --- INÍCIO DO CÓDIGO JAVASCRIPT ---
+    
+    /* Este é um "Ouvinte de Evento" (Event Listener).
+      Ele diz ao 'document' (a página inteira):
+      "Ei, quando você terminar de carregar todo o HTML ('DOMContentLoaded'),
+      execute a função que está aqui dentro."
+      
+      Isso previne erros, pois nosso script não vai tentar achar um botão
+      que ainda não foi carregado na tela.
+    */
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      // Criamos uma "variável" (como uma caixa para guardar algo) chamada 'botaoHacker'.
+      // 'const' significa que o valor desta caixa (o botão) não vai mudar.
+      // 'document.getElementById('hacker-toggle')' é a mágica:
+      // O JS "procura" na página inteira por um elemento com o ID 'hacker-toggle'.
+      const botaoHacker = document.getElementById('hacker-toggle');
+      
+      // Criamos outra variável para guardar o 'body' (corpo) da página.
+      // Isso facilita para adicionarmos a classe '.modo-hacker' nele.
+      const corpoDaPagina = document.body;
+      
+      // Criamos uma variável para guardar o texto do nosso "código hacker" piscante
+      // que está escondido na tela.
+      const codigoHacker = document.querySelector('.codigo-hacker');
+
+      // Agora, dizemos ao nosso botão para "ouvir" (addEventListener) um 'click'.
+      // Quando o usuário CLICAR no 'botaoHacker', o navegador vai
+      // executar a função que passamos para ele (o '() => { ... }').
+      botaoHacker.addEventListener('click', () => {
         
-        // 'const' declara uma "constante", uma variável que não vai mudar.
-        // 'document.getElementById("ID_DO_ELEMENTO")' é o comando para
-        // "JavaScript, vá no documento HTML e encontre o elemento com o RG 'ID_DO_ELEMENTO'".
+        // AQUI ESTÁ A INTERAÇÃO 💡!
+        // 'corpoDaPagina.classList.toggle('modo-hacker')' é o comando principal.
+        // '.classList' é a lista de classes CSS do 'body'.
+        // '.toggle()' é uma ação que "alterna":
+        // - Se o 'body' NÃO tem a classe 'modo-hacker', ele ADICIONA.
+        // - Se o 'body' JÁ TEM a classe 'modo-hacker', ele REMOVE.
+        // É isso que liga e desliga o nosso Modo Hacker!
+        corpoDaPagina.classList.toggle('modo-hacker');
         
-        const botaoA = document.getElementById("opcaoA");
-        const botaoB = document.getElementById("opcaoB");
-        const botaoC = document.getElementById("opcaoC");
+        // --- BÔNUS: Mudar o texto do botão ---
         
-        // Capturamos a "janela" do chat para adicionar novas mensagens.
-        const chatLog = document.getElementById("chat-log");
-        
-        // Capturamos o "container" (a caixa) que guarda os botões.
-        const containerBotoes = document.getElementById("container-botoes");
-
-        
-        // 2. DEFINIR O QUE ACONTECE QUANDO ALGUÉM CLICA
-        
-        // 'addEventListener' é o comando mais importante.
-        // Ele diz ao elemento: "Ei, fique 'ouvindo' por um evento".
-        // O evento que queremos "ouvir" é o 'click'.
-        
-        // Quando o 'botaoA' for clicado, ele vai executar a função 'responder'.
-        botaoA.addEventListener('click', responder);
-        botaoB.addEventListener('click', responder);
-        botaoC.addEventListener('click', responder);
-        
-        
-        // 3. CRIAR A FUNÇÃO DE RESPOSTA
-        
-        // 'function' declara uma função. Uma função é um bloco de código
-        // que podemos "chamar" (executar) quando quisermos.
-        // 'evento' é um objeto que o navegador nos dá com informações sobre o clique.
-        function responder(evento) {
-            
-            // 'evento.target' nos diz EXATAMENTE qual botão foi clicado (A, B ou C).
-            const botaoClicado = evento.target;
-            
-            // Pegamos o texto que estava escrito dentro do botão.
-            const textoDaEscolha = botaoClicado.innerText;
-
-            // --- AÇÃO 1: Mostrar a escolha do jogador no chat ---
-            
-            // 'chatLog.innerHTML += ...' significa "Pegue o que JÁ TEM dentro do chatLog
-            // e ADICIONE (+=) este novo pedaço de HTML".
-            // Estamos adicionando um novo parágrafo com a classe 'mensagem-jogador'.
-            chatLog.innerHTML += `<p class="mensagem-jogador">${textoDaEscolha}</p>`;
-
-            
-            // --- AÇÃO 2: Esconder os botões ---
-            // Não queremos que o usuário clique de novo.
-            // Acessamos o 'style' (CSS) do container e mudamos o 'display' para 'none' (sumir).
-            containerBotoes.style.display = 'none';
-
-            
-            // --- AÇÃO 3: Simular "Jake digitando..." ---
-            // Isso dá um efeito mais realista, como no jogo!
-            
-            // Adicionamos a mensagem "digitando..."
-            chatLog.innerHTML += `<p class="digitando" id="msg-digitando">Jake está digitando...</p>`;
-
-            // 'setTimeout' é uma função que espera um tempo antes de executar um código.
-            // Ela espera 2000 milissegundos (ou 2 segundos).
-            setTimeout(function() {
-            
-                // --- AÇÃO 4 (DEPOIS DE 2 SEGUNDOS): Mostrar a resposta do Jake ---
-                
-                // Primeiro, encontramos a mensagem "digitando..." que acabamos de adicionar.
-                const msgDigitando = document.getElementById("msg-digitando");
-                // E a removemos.
-                msgDigitando.remove();
-                
-                // Agora, adicionamos a resposta final do Jake.
-                // Não importa qual botão você clicou, a história do Jake continua!
-                chatLog.innerHTML += `<p class="mensagem-jake"><strong>[Jake]</strong>: Ótimo. Preciso da sua ajuda.</p>`;
-                chatLog.innerHTML += `<p class="mensagem-jake"><strong>[Jake]</strong>: É um assunto sério. É sobre a Hannah.</p>`;
-                
-                // Vamos fazer o scroll (rolagem) do chat ir até o final automaticamente.
-                chatLog.scrollTop = chatLog.scrollHeight;
-            
-            }, 2000); // 2000 ms = 2 segundos
+        // Verificamos se o 'body' AGORA TEM a classe 'modo-hacker'
+        if (corpoDaPagina.classList.contains('modo-hacker')) {
+          
+          // Se SIM, mudamos o texto (textContent) do botão
+          botaoHacker.textContent = 'Desativar Modo Hacker ❌';
+          
+          // E também atualizamos o texto do 'codigo-hacker' com dados aleatórios
+          // (Isso é só um efeito visual para parecer que o "código" está mudando)
+          codigoHacker.textContent = Math.random().toString(2).repeat(1000); 
+          
+        } else {
+          
+          // Se NÃO (ou seja, acabamos de desligar), voltamos o texto original.
+          botaoHacker.textContent = 'Ativar Modo Hacker 💡';
         }
-
-    </script>
+        
+      }); // Fim da função do 'click'
+      
+    }); // Fim da função do 'DOMContentLoaded'
+    
+    // --- FIM DO CÓDIGO JAVASCRIPT ---
+  </script>
 
 </body>
-
 </html>
